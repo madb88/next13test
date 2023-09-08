@@ -1,5 +1,6 @@
-import { ProductList } from "../ui/organisms/ProductList";
-import { type ProductItemType } from "../ui/types";
+import { type ProductItemType } from "../../ui/types";
+import { ProductList } from "@/app/ui/organisms/ProductList";
+import "server-only";
 
 const products: ProductItemType[] = [
 	{
