@@ -53,5 +53,6 @@ const productResponseItemToProductItemType = (
 			alt: product.title,
 			src: product.image,
 		},
+		description: product.description,
 	};
 };
