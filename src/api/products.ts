@@ -18,6 +18,7 @@ export const getProductsList = async (
 	limit?: number,
 	offset?: number,
 ) => {
+	console.log("limit", limit);
 	const res = await fetch(
 		`https://naszsklep-api.vercel.app/api/products?take=${limit}&offset=${offset}`,
 	);

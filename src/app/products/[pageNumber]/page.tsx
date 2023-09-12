@@ -25,7 +25,11 @@ export default async function SepareteProductsPage({
 	return (
 		<section className="mx-w-md md:max-md: mx-auto p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
 			<ProductList products={products} />
-			<Pagination count={allProducts.length} pageSize={4} />
+			<Pagination
+				count={allProducts.length}
+				pageSize={4}
+				link={"/products/"}
+			/>
 		</section>
 	);
 }
