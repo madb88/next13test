@@ -5,15 +5,6 @@ import { ProductCoverImage } from "@/app/ui/atoms/ProductCoverImage";
 import { ProductListItemDescription } from "@/app/ui/atoms/ProductListItemDescription";
 import { SuggestedProducts } from "@/app/ui/organisms/SuggestedProducts";
 
-// export const generateStaticParams = async () => {
-// 	const products = await getProductsList();
-// 	return products
-// 		.map((product) => ({
-// 			product: product.id,
-// 		}))
-// 		.slice(0, 2);
-// };
-
 export const generateMetadata = async ({
 	params,
 }: {
@@ -21,7 +12,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
 	const product = await getProductById(params.productId);
 	return {
-		title: `${product.name} - sklep internetowy`,
+		title: `${product.name}`,
 		description: product.description,
 		openGraph: {
 			title: `${product.name} - sklep internetowy`,
