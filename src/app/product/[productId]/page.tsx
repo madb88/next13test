@@ -13,7 +13,7 @@ export const generateMetadata = async ({
 	const product = await getProductById(params.productId);
 	return {
 		title: `${product.name}`,
-		description: product.description,
+		description: `${product.description}`,
 		openGraph: {
 			title: `${product.name} - sklep internetowy`,
 			description: product.description,
