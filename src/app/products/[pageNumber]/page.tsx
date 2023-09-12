@@ -23,8 +23,10 @@ export default async function SepareteProductsPage({
 	const products = await getProductsList(4, offset);
 
 	return (
-		<section className="mx-w-md md:max-md: mx-auto p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
-			<ProductList products={products} />
+		<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
+			<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
+				<ProductList products={products} />
+			</section>
 			<Pagination
 				count={allProducts.length}
 				pageSize={4}

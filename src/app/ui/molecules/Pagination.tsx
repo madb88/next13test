@@ -15,17 +15,24 @@ export const Pagination = ({
 	const totalPageCount = Math.ceil(count / pageSize);
 
 	return (
-		<div aria-label="pagination">
-			{Array.from({ length: totalPageCount }).map((_, index) => {
-				return (
-					<ActiveLink
-						key={index}
-						href={`${link}${index + 1}` as Route}
-					>
-						{index + 1}
-					</ActiveLink>
-				);
-			})}
-		</div>
+		<nav
+			aria-label="pagination"
+			className="mt-auto flex items-center justify-center"
+		>
+			<ul className="-mt-px flex gap-2">
+				{Array.from({ length: totalPageCount }).map((_, index) => {
+					return (
+						<li key={index}>
+							<ActiveLink
+								key={index}
+								href={`${link}${index + 1}` as Route}
+							>
+								<span>{index + 1}</span>
+							</ActiveLink>
+						</li>
+					);
+				})}
+			</ul>
+		</nav>
 	);
 };
