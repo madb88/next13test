@@ -29,8 +29,8 @@ export default async function ProductDetailsPage({
 }) {
 	const product = await getProductById(params.productId);
 	return (
-		<>
-			<article className="max-w-xs">
+		<section className="flex flex-col gap-3">
+			<article className="flex gap-3">
 				<ProductCoverImage
 					src={product.coverImage.src}
 					alt={product.coverImage.alt}
@@ -42,6 +42,6 @@ export default async function ProductDetailsPage({
 					<SuggestedProducts />
 				</Suspense>
 			</aside>
-		</>
+		</section>
 	);
 }
