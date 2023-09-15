@@ -17,10 +17,11 @@ export default async function SepareteProductsPage({
 }: {
 	params: { pageNumber: string };
 }) {
-	const allProducts = await getProductsList();
+	const productsPerPage = 4;
 
-	const offset = (Number(params.pageNumber) - 1) * 4;
-	const products = await getProductsList(4, offset);
+	const allProducts = await getProductsList();
+	const offset = (Number(params.pageNumber) - 1) * productsPerPage;
+	const products = await getProductsList(productsPerPage, offset);
 
 	return (
 		<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
