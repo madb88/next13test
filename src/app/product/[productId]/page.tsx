@@ -18,7 +18,9 @@ export const generateMetadata = async ({
 		openGraph: {
 			title: product.name,
 			description: product.description,
-			images: [{ url: product.coverImage.src }],
+			images: [
+				{ url: product.coverImage ? product.coverImage.src : "" },
+			],
 		},
 	};
 };
@@ -32,10 +34,12 @@ export default async function ProductDetailsPage({
 	return (
 		<section className="flex flex-col gap-3">
 			<article className="flex gap-3">
-				<ProductCoverImage
-					src={product.coverImage.src}
-					alt={product.coverImage.alt}
-				/>
+				{product.coverImage && (
+					<ProductCoverImage
+						src={product.coverImage.src}
+						alt={product.coverImage.alt}
+					/>
+				)}
 				<ProductListItemDescription product={product} />
 			</article>
 			<aside>

@@ -111,10 +111,7 @@ const productResponseItemToProductItemType = (
 		name: product.title,
 		price: product.price,
 		category: product.category,
-		coverImage: {
-			alt: product.title,
-			src: product.image,
-		},
+		coverImage: { src: product.image, alt: product.title },
 		description: product.description,
 	};
 };
