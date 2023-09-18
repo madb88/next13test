@@ -13,7 +13,9 @@ const config: CodegenConfig = {
 		"src/gql/": {
 			preset: "client",
 			plugins: [],
-			presetConfig: {},
+			presetConfig: {
+				fragmentMasking: false,
+			},
 			config: {
 				defaultScalarType: "unknown",
 				useTypeImports: true,
