@@ -14,10 +14,12 @@ export const ProductListItem = ({
 		<li>
 			<Link href={`/product/${product.id}`}>
 				<article>
-					<ProductCoverImage
-						src={product.coverImage.src}
-						alt={product.coverImage.alt}
-					/>
+					{product.coverImage && (
+						<ProductCoverImage
+							src={product.coverImage.src}
+							alt={product.coverImage.alt}
+						/>
+					)}
 					<ProductListItemDescription product={product} />
 				</article>
 			</Link>

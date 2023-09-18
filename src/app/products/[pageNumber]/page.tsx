@@ -1,4 +1,4 @@
-import { getProductsList } from "@/api/products";
+import { getProductsList, getProductsListNew } from "@/api/products";
 import { ProductList } from "@/app/ui/organisms/ProductList";
 import "server-only";
 import { Pagination } from "@/app/ui/molecules/Pagination";
@@ -19,7 +19,7 @@ export default async function SepareteProductsPage({
 }) {
 	const productsPerPage = 4;
 
-	const allProducts = await getProductsList();
+	const allProducts = await getProductsListNew();
 	const offset = (Number(params.pageNumber) - 1) * productsPerPage;
 	const products = await getProductsList(productsPerPage, offset);
 
