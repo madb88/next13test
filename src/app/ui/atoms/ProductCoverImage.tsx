@@ -1,3 +1,5 @@
+import NextImage from "next/image";
+
 type ProductCoverImageProps = { src: string; alt: string };
 
 export const ProductCoverImage = ({
@@ -6,7 +8,7 @@ export const ProductCoverImage = ({
 }: ProductCoverImageProps) => {
 	return (
 		<div className="hover:bg-slate-10 aspect-square overflow-hidden rounded-md border bg-slate-50">
-			<img
+			<NextImage
 				width={320}
 				height={320}
 				alt={alt}

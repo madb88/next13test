@@ -1,9 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import Navigation from "./ui/organisms/Navigation";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin", "latin-ext"] });
+
+const montserrat = Montserrat({
+	subsets: ["latin", "latin-ext"],
+});
 
 export const metadata: Metadata = {
 	title: "Products",
@@ -16,7 +20,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className={montserrat.className}>
 				<header className="sticky top-0 z-20 border-b bg-white bg-opacity-60 backdrop-blur-lg">
 					<Navigation />
 				</header>
