@@ -34,25 +34,13 @@ export const getProductsList = async (
 	return products;
 };
 
-export const getProductsListNew = async (): Promise<
-	ProductItemType[]
-> => {
+export const getProductsListNew = async () => {
 	const graphqlResponse = await executeGraphqlQuery(
 		ProductsGetListDocument,
 		{},
 	);
 
-	return graphqlResponse.products.map((p) => ({
-		id: p.id,
-		name: p.name,
-		price: p.price,
-		category: p.categories[0]?.name || "",
-		coverImage: p.images[0] && {
-			alt: p.name,
-			src: p.images[0].url,
-		},
-		description: p.description,
-	}));
+	return graphqlResponse.products;
 };
 
 export const getProductById = async (
