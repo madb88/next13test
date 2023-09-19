@@ -1,3 +1,5 @@
+import NextImage from "next/image";
+
 export default function ProductImage({
 	src,
 	alt,
@@ -6,7 +8,7 @@ export default function ProductImage({
 	alt: string;
 }) {
 	<div className="hover:bg-slate-10 aspect-square overflow-hidden rounded-md border bg-slate-50">
-		<img
+		<NextImage
 			width={320}
 			height={320}
 			alt={alt}
