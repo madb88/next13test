@@ -10758,12 +10758,13 @@ export type ProductGetByIdQuery = { product?: { id: string, name: string, descri
 
 export type ProductListItemFragmentFragment = { id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
-export type ProductsGetByCategorySlugQueryVariables = Exact<{
-  slug: Scalars['String']['input'];
+export type ProductsGetByCategoryNameQueryVariables = Exact<{
+  categoryName: Scalars['String']['input'];
+  limit: Scalars['Int']['input'];
 }>;
 
 
-export type ProductsGetByCategorySlugQuery = { categories: Array<{ products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
+export type ProductsGetByCategoryNameQuery = { categories: Array<{ products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
 
 export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10829,10 +10830,10 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
-export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
-    query ProductsGetByCategorySlug($slug: String!) {
-  categories(where: {slug: $slug}) {
-    products(first: 10) {
+export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
+    query ProductsGetByCategoryName($categoryName: String!, $limit: Int!) {
+  categories(where: {name: $categoryName}) {
+    products(first: $limit) {
       ...ProductListItemFragment
     }
   }
@@ -10847,7 +10848,7 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     url
   }
   price
-}`) as unknown as TypedDocumentString<ProductsGetByCategorySlugQuery, ProductsGetByCategorySlugQueryVariables>;
+}`) as unknown as TypedDocumentString<ProductsGetByCategoryNameQuery, ProductsGetByCategoryNameQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList {
   products(first: 10) {

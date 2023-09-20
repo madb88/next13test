@@ -1,6 +1,7 @@
 import { executeGraphqlQuery } from "./grapqhlApi";
 import {
 	ProductGetByIdDocument,
+	ProductsGetByCategoryNameDocument,
 	ProductsGetListDocument,
 } from "@/gql/graphql";
 
@@ -20,4 +21,16 @@ export const getProductById = async (id: string) => {
 	);
 
 	return graphqlResponse.product;
+};
+
+export const getProductsByCategoryName = async (
+	categoryName: string,
+	limit: number,
+) => {
+	const graphqlResponse = await executeGraphqlQuery(
+		ProductsGetByCategoryNameDocument,
+		{ categoryName: categoryName, limit: limit },
+	);
+
+	return graphqlResponse.categories;
 };

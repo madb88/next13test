@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { SuggestedProducts } from "../organisms/SuggestedProducts";
 import Loader from "./Loader";
 import { ProductCoverImage } from "./ProductCoverImage";
 import { ProductDescription } from "./ProductDescription";
@@ -23,7 +24,11 @@ export const Product = ({ product }: ProductProps) => {
 			</article>
 			<aside>
 				<Suspense fallback={<Loader />}>
-					{/* <SuggestedProducts /> */}
+					{product.categories[0] && (
+						<SuggestedProducts
+							categoryName={product.categories[0].name}
+						/>
+					)}
 				</Suspense>
 			</aside>
 		</section>
