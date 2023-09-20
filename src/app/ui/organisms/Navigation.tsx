@@ -15,6 +15,9 @@ export default function Navigation({}) {
 						<li className="first:pl-4 last:pr-4 lg:px-0">
 							<ActiveLink href={"/products"}>All</ActiveLink>
 						</li>
+						<li className="first:pl-4 last:pr-4 lg:px-0">
+							<ActiveLink href={"/categories"}>Categories</ActiveLink>
+						</li>
 					</ul>
 				</nav>
 				<div className="flex h-full flex-1 items-center px-2 lg:ml-6 lg:h-16 lg:justify-end">
