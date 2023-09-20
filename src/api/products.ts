@@ -5,13 +5,19 @@ import {
 	ProductsGetListDocument,
 } from "@/gql/graphql";
 
-export const getProductsListNew = async () => {
+export const getProductsListNew = async (
+	first?: number,
+	skip?: number,
+) => {
 	const graphqlResponse = await executeGraphqlQuery(
 		ProductsGetListDocument,
-		{},
+		{ first: first, skip: skip },
 	);
 
-	return graphqlResponse.products;
+	return {
+		products: graphqlResponse.products,
+		productsConnection: graphqlResponse.productsConnection,
+	};
 };
 
 export const getProductById = async (id: string) => {

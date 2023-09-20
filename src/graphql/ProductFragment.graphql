@@ -9,4 +9,9 @@ fragment ProductFragment on Product {
 		url
 	}
 	price
+	variants {
+		__typename
+	}
 }
+
+# ckdu44mn40gxh010405uwgbtw

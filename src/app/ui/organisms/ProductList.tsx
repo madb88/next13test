@@ -6,6 +6,7 @@ type ProductListProps = {
 };
 
 export const ProductList = ({ products }: ProductListProps) => {
+
 	return (
 		<ul
 			data-testid="products-list"

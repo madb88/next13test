@@ -10747,14 +10747,14 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
-export type ProductFragmentFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
+export type ProductFragmentFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, variants: Array<{ __typename: 'ProductColorVariant' } | { __typename: 'ProductSizeColorVariant' } | { __typename: 'ProductSizeVariant' }> };
 
 export type ProductGetByIdQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
 }>;
 
 
-export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
+export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, variants: Array<{ __typename: 'ProductColorVariant' } | { __typename: 'ProductSizeColorVariant' } | { __typename: 'ProductSizeVariant' }> } | null };
 
 export type ProductListItemFragmentFragment = { id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
@@ -10766,10 +10766,13 @@ export type ProductsGetByCategoryNameQueryVariables = Exact<{
 
 export type ProductsGetByCategoryNameQuery = { categories: Array<{ products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
 
-export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProductsGetListQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
 
 
-export type ProductsGetListQuery = { products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+export type ProductsGetListQuery = { products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }>, productsConnection: { aggregate: { count: number } } };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -10797,6 +10800,9 @@ export const ProductFragmentFragmentDoc = new TypedDocumentString(`
     url
   }
   price
+  variants {
+    __typename
+  }
 }
     `, {"fragmentName":"ProductFragment"}) as unknown as TypedDocumentString<ProductFragmentFragment, unknown>;
 export const ProductListItemFragmentFragmentDoc = new TypedDocumentString(`
@@ -10829,6 +10835,9 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
     url
   }
   price
+  variants {
+    __typename
+  }
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
     query ProductsGetByCategoryName($categoryName: String!, $limit: Int!) {
@@ -10850,9 +10859,14 @@ export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
   price
 }`) as unknown as TypedDocumentString<ProductsGetByCategoryNameQuery, ProductsGetByCategoryNameQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList {
-  products(first: 10) {
+    query ProductsGetList($first: Int, $skip: Int) {
+  products(first: $first, skip: $skip) {
     ...ProductListItemFragment
+  }
+  productsConnection {
+    aggregate {
+      count
+    }
   }
 }
     fragment ProductListItemFragment on Product {
