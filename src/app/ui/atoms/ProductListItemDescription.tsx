@@ -1,12 +1,12 @@
-import { type ProductItemType } from "../types";
+import { type ProductListItemFragmentFragment } from "@/gql/graphql";
 import { formatMoney } from "@/app/utils";
 
 type ProductListItemDescriptionProps = {
-	product: ProductItemType;
+	product: ProductListItemFragmentFragment;
 };
 
 export const ProductListItemDescription = ({
-	product: { name, category, price, description },
+	product: { name, price, categories },
 }: ProductListItemDescriptionProps) => {
 	return (
 		<div className="mt-2 flex justify-between gap-3">
@@ -15,12 +15,8 @@ export const ProductListItemDescription = ({
 					{name}
 				</h1>
 				<h3 className="text-sm font-semibold text-gray-700">
-					{description}
+					{categories.map((category) => category.name).join(", ")}
 				</h3>
-				<p className="text-sm text-gray-500">
-					<span className="sr-only">Kategoria:</span>
-					{category}
-				</p>
 			</div>
 			<p className="text-sm font-medium text-gray-900">
 				<span className="sr-only">Cena:</span>{" "}
