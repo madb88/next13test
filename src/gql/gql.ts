@@ -23,6 +23,7 @@ const documents = {
     "query ProductsSearchByName($name: String!) {\n  products(where: {name_contains: $name}) {\n    id\n    name\n    categories(first: 1) {\n      name\n    }\n    images(first: 4) {\n      url\n    }\n    price\n  }\n}": types.ProductsSearchByNameDocument,
     "query getCategories {\n  categories {\n    id\n    name\n  }\n}": types.GetCategoriesDocument,
     "query getCollections {\n  collections {\n    id\n    name\n  }\n}": types.GetCollectionsDocument,
+    "query getColorVariants {\n  productColorVariants {\n    name\n  }\n}": types.GetColorVariantsDocument,
 };
 
 /**
@@ -61,6 +62,10 @@ export function graphql(source: "query getCategories {\n  categories {\n    id\n
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query getCollections {\n  collections {\n    id\n    name\n  }\n}"): typeof import('./graphql').GetCollectionsDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query getColorVariants {\n  productColorVariants {\n    name\n  }\n}"): typeof import('./graphql').GetColorVariantsDocument;
 
 
 export function graphql(source: string) {

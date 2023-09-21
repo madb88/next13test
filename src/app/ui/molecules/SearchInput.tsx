@@ -24,9 +24,9 @@ export const SearchInput = () => {
 		};
 
 		const queryString = new URLSearchParams(queryParams).toString();
-		if (search !== "") {
-			router.push(`/search?${queryString}`);
-		}
+
+		if (!search) return router.push(`/products`);
+		router.push(`/search?${queryString}`);
 	};
 	return (
 		<>

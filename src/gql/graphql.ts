@@ -10798,6 +10798,11 @@ export type GetCollectionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCollectionsQuery = { collections: Array<{ id: string, name: string }> };
 
+export type GetColorVariantsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetColorVariantsQuery = { productColorVariants: Array<{ name: string }> };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -10954,3 +10959,10 @@ export const GetCollectionsDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<GetCollectionsQuery, GetCollectionsQueryVariables>;
+export const GetColorVariantsDocument = new TypedDocumentString(`
+    query getColorVariants {
+  productColorVariants {
+    name
+  }
+}
+    `) as unknown as TypedDocumentString<GetColorVariantsQuery, GetColorVariantsQueryVariables>;
