@@ -1,7 +1,13 @@
+import { type Route } from "next";
 import { ActiveLink } from "../atoms/ActiveLink";
 import { SearchInput } from "../molecules/SearchInput";
+import { getCategoriesList } from "@/api/categories";
+import { getCollectionsList } from "@/api/collections";
 
-export default function Navigation({}) {
+export default async function Navigation({}) {
+	const categories = await getCategoriesList();
+	const collections = await getCollectionsList();
+
 	return (
 		<div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
 			<div className="flex flex-col justify-between gap-y-4 pb-4 lg:flex-row lg:items-center lg:pb-0">
@@ -16,9 +22,34 @@ export default function Navigation({}) {
 						<li className="first:pl-4 last:pr-4 lg:px-0">
 							<ActiveLink href={"/products"}>All</ActiveLink>
 						</li>
-						<li className="first:pl-4 last:pr-4 lg:px-0">
-							<ActiveLink href={"/categories"}>Categories</ActiveLink>
-						</li>
+						{categories.map((category) => {
+							return (
+								<li
+									key={category.id}
+									className="first:pl-4 last:pr-4 lg:px-0"
+								>
+									<ActiveLink
+										href={`/categories/${category.name}` as Route}
+									>
+										{category.name}
+									</ActiveLink>
+								</li>
+							);
+						})}
+						{collections.map((collection) => {
+							return (
+								<li
+									key={collection.id}
+									className="first:pl-4 last:pr-4 lg:px-0"
+								>
+									<ActiveLink
+										href={`/collections/${collection.name}` as Route}
+									>
+										{collection.name}
+									</ActiveLink>
+								</li>
+							);
+						})}
 					</ul>
 				</nav>
 				<div className="flex h-full flex-1 items-center px-2 lg:ml-6 lg:h-16 lg:justify-end">

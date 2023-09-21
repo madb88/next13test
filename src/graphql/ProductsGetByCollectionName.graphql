@@ -1,0 +1,7 @@
+query ProductsGetByCollectionName($collectionName: String!) {
+	collections(where: { name_contains: $collectionName }) {
+		products {
+			...ProductListItemFragment
+		}
+	}
+}

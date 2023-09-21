@@ -2,6 +2,7 @@ import { executeGraphqlQuery } from "./grapqhlApi";
 import {
 	ProductGetByIdDocument,
 	ProductsGetByCategoryNameDocument,
+	ProductsGetByCollectionNameDocument,
 	ProductsGetListDocument,
 	ProductsSearchByNameDocument,
 } from "@/gql/graphql";
@@ -32,7 +33,7 @@ export const getProductById = async (id: string) => {
 
 export const getProductsByCategoryName = async (
 	categoryName: string,
-	limit: number,
+	limit?: number,
 ) => {
 	const graphqlResponse = await executeGraphqlQuery(
 		ProductsGetByCategoryNameDocument,
@@ -49,4 +50,15 @@ export const getProductsByName = async (name: string) => {
 	);
 
 	return graphqlResponse.products;
+};
+
+export const getProductsByCollectionName = async (
+	collectionName: string,
+) => {
+	const graphqlResponse = await executeGraphqlQuery(
+		ProductsGetByCollectionNameDocument,
+		{ collectionName: decodeURIComponent(collectionName) },
+	);
+
+	return graphqlResponse.collections;
 };

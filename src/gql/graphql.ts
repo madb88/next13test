@@ -10760,11 +10760,18 @@ export type ProductListItemFragmentFragment = { id: string, name: string, price:
 
 export type ProductsGetByCategoryNameQueryVariables = Exact<{
   categoryName: Scalars['String']['input'];
-  limit: Scalars['Int']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
 export type ProductsGetByCategoryNameQuery = { categories: Array<{ products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
+
+export type ProductsGetByCollectionNameQueryVariables = Exact<{
+  collectionName: Scalars['String']['input'];
+}>;
+
+
+export type ProductsGetByCollectionNameQuery = { collections: Array<{ products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
 
 export type ProductsGetListQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -10780,6 +10787,16 @@ export type ProductsSearchByNameQueryVariables = Exact<{
 
 
 export type ProductsSearchByNameQuery = { products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
+export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCategoriesQuery = { categories: Array<{ id: string, name: string }> };
+
+export type GetCollectionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCollectionsQuery = { collections: Array<{ id: string, name: string }> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -10847,7 +10864,7 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   }
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
-    query ProductsGetByCategoryName($categoryName: String!, $limit: Int!) {
+    query ProductsGetByCategoryName($categoryName: String!, $limit: Int) {
   categories(where: {name: $categoryName}) {
     products(first: $limit) {
       ...ProductListItemFragment
@@ -10865,6 +10882,25 @@ export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductsGetByCategoryNameQuery, ProductsGetByCategoryNameQueryVariables>;
+export const ProductsGetByCollectionNameDocument = new TypedDocumentString(`
+    query ProductsGetByCollectionName($collectionName: String!) {
+  collections(where: {name_contains: $collectionName}) {
+    products {
+      ...ProductListItemFragment
+    }
+  }
+}
+    fragment ProductListItemFragment on Product {
+  id
+  name
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductsGetByCollectionNameQuery, ProductsGetByCollectionNameQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($first: Int, $skip: Int) {
   products(first: $first, skip: $skip) {
@@ -10902,3 +10938,19 @@ export const ProductsSearchByNameDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ProductsSearchByNameQuery, ProductsSearchByNameQueryVariables>;
+export const GetCategoriesDocument = new TypedDocumentString(`
+    query getCategories {
+  categories {
+    id
+    name
+  }
+}
+    `) as unknown as TypedDocumentString<GetCategoriesQuery, GetCategoriesQueryVariables>;
+export const GetCollectionsDocument = new TypedDocumentString(`
+    query getCollections {
+  collections {
+    id
+    name
+  }
+}
+    `) as unknown as TypedDocumentString<GetCollectionsQuery, GetCollectionsQueryVariables>;
