@@ -1,0 +1,6 @@
+query getCollections {
+	collections {
+		id
+		name
+	}
+}

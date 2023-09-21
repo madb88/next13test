@@ -1,11 +1,22 @@
 import { ProductList } from "./ProductList";
-import { getProductsList } from "@/api/products";
+import { getProductsByCategoryName } from "@/api/products";
 
-const sleep = (ms: number) =>
-	new Promise((resolve) => setTimeout(resolve, ms));
+type SuggestedProductsProps = {
+	categoryName: string;
+};
 
-export const SuggestedProducts = async () => {
-	const products = await getProductsList();
-	await sleep(5000);
-	return <ProductList products={products.slice(-4)} />;
+export const SuggestedProducts = async ({
+	categoryName,
+}: SuggestedProductsProps) => {
+	const categories = await getProductsByCategoryName(categoryName, 4);
+
+	if (!categories[0]) {
+		return <>There are no similar products for this category</>;
+	}
+
+	return (
+		<div data-testid="related-products">
+			<ProductList products={categories[0].products} />;
+		</div>
+	);
 };

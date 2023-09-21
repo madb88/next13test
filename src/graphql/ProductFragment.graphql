@@ -1,0 +1,17 @@
+fragment ProductFragment on Product {
+	id
+	name
+	description
+	categories(first: 1) {
+		name
+	}
+	images(first: 4) {
+		url
+	}
+	price
+	variants {
+		__typename
+	}
+}
+
+# ckdu44mn40gxh010405uwgbtw
