@@ -22,20 +22,6 @@ export default async function Navigation({}) {
 						<li className="first:pl-4 last:pr-4 lg:px-0">
 							<ActiveLink href={"/products"}>All</ActiveLink>
 						</li>
-						{categories.map((category) => {
-							return (
-								<li
-									key={category.id}
-									className="first:pl-4 last:pr-4 lg:px-0"
-								>
-									<ActiveLink
-										href={`/categories/${category.name}` as Route}
-									>
-										{category.name}
-									</ActiveLink>
-								</li>
-							);
-						})}
 						{collections.map((collection) => {
 							return (
 								<li
@@ -46,6 +32,20 @@ export default async function Navigation({}) {
 										href={`/collections/${collection.name}` as Route}
 									>
 										{collection.name}
+									</ActiveLink>
+								</li>
+							);
+						})}
+						{categories.map((category) => {
+							return (
+								<li
+									key={category.id}
+									className="first:pl-4 last:pr-4 lg:px-0"
+								>
+									<ActiveLink
+										href={`/categories/${category.name}` as Route}
+									>
+										{category.name}
 									</ActiveLink>
 								</li>
 							);

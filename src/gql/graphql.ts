@@ -10760,7 +10760,8 @@ export type ProductListItemFragmentFragment = { id: string, name: string, price:
 
 export type ProductsGetByCategoryNameQueryVariables = Exact<{
   categoryName: Scalars['String']['input'];
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -10869,9 +10870,9 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   }
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
-    query ProductsGetByCategoryName($categoryName: String!, $limit: Int) {
+    query ProductsGetByCategoryName($categoryName: String!, $first: Int, $skip: Int) {
   categories(where: {name: $categoryName}) {
-    products(first: $limit) {
+    products(first: $first, skip: $skip) {
       ...ProductListItemFragment
     }
   }

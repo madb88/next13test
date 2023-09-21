@@ -13,7 +13,9 @@ export const SearchInput = () => {
 	const debounceSearch = useDebounce(search, 500);
 
 	useEffect(() => {
-		if (!debounceSearch) return;
+		if (debounceSearch === '') {
+			router.push("/products");
+		}
 		router.push(`/search?query=${debounceSearch}`);
 	}, [debounceSearch, router]);
 

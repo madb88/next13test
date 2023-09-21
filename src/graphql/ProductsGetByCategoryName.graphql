@@ -1,6 +1,10 @@
-query ProductsGetByCategoryName($categoryName: String!, $limit: Int) {
+query ProductsGetByCategoryName(
+	$categoryName: String!
+	$first: Int
+	$skip: Int
+) {
 	categories(where: { name: $categoryName }) {
-		products(first: $limit) {
+		products(first: $first, skip: $skip) {
 			...ProductListItemFragment
 		}
 	}

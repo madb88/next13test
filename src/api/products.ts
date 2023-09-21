@@ -33,11 +33,12 @@ export const getProductById = async (id: string) => {
 
 export const getProductsByCategoryName = async (
 	categoryName: string,
-	limit?: number,
+	first?: number,
+	skip?: number,
 ) => {
 	const graphqlResponse = await executeGraphqlQuery(
 		ProductsGetByCategoryNameDocument,
-		{ categoryName: categoryName, limit: limit },
+		{ categoryName: categoryName, first: first, skip: skip },
 	);
 
 	return graphqlResponse.categories;
