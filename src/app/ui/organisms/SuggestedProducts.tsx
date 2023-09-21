@@ -14,5 +14,9 @@ export const SuggestedProducts = async ({
 		return <>There are no similar products for this category</>;
 	}
 
-	return <ProductList products={categories[0].products} />;
+	return (
+		<div data-testid="related-products">
+			<ProductList products={categories[0].products} />;
+		</div>
+	);
 };

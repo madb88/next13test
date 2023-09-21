@@ -10,9 +10,6 @@ type ProductProps = {
 };
 
 export const Product = ({ product }: ProductProps) => {
-	const { variants } = product;
-	console.log(variants);
-
 	return (
 		<section className="flex flex-col gap-3">
 			<article className="flex gap-3">

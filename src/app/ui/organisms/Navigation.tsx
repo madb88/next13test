@@ -1,4 +1,5 @@
 import { ActiveLink } from "../atoms/ActiveLink";
+import { SearchInput } from "../molecules/SearchInput";
 
 export default function Navigation({}) {
 	return (
@@ -22,11 +23,13 @@ export default function Navigation({}) {
 				</nav>
 				<div className="flex h-full flex-1 items-center px-2 lg:ml-6 lg:h-16 lg:justify-end">
 					<div className="w-full max-w-lg lg:max-w-xs">
-						<label htmlFor="search" className="sr-only">
+						<label htmlFor="searchInput" className="sr-only">
 							Szukaj
 						</label>
 						<div className="relative">
-							<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
+							<div className=" absolute inset-y-0 left-0 flex items-center pl-3">
+								<SearchInput />
+							</div>
 						</div>
 					</div>
 				</div>

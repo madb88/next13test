@@ -3,6 +3,7 @@ import {
 	ProductGetByIdDocument,
 	ProductsGetByCategoryNameDocument,
 	ProductsGetListDocument,
+	ProductsSearchByNameDocument,
 } from "@/gql/graphql";
 
 export const getProductsListNew = async (
@@ -39,4 +40,13 @@ export const getProductsByCategoryName = async (
 	);
 
 	return graphqlResponse.categories;
+};
+
+export const getProductsByName = async (name: string) => {
+	const graphqlResponse = await executeGraphqlQuery(
+		ProductsSearchByNameDocument,
+		{ name: name },
+	);
+
+	return graphqlResponse.products;
 };
