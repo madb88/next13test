@@ -1,22 +1,31 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { type FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import { type FormEvent, useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import useDebounce from "@/app/hooks";
 
 export const SearchInput = () => {
-	const [search, setSearch] = useState("");
+	const searchParams = useSearchParams();
+	const query = searchParams.get("query");
 	const router = useRouter();
+	const [search, setSearch] = useState(query || "");
+
+	const debounceSearch = useDebounce(search, 500);
+
+	useEffect(() => {
+		if (!debounceSearch) return;
+		router.push(`/search?query=${debounceSearch}`);
+	}, [debounceSearch, router]);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		const queryParams = {
-			search: search,
+			query: search,
 		};
 
 		const queryString = new URLSearchParams(queryParams).toString();
-		if (search) {
-			router.push(`/products?${queryString}`);
-		} else {
-			router.push(`/products`);
+		if (search !== "") {
+			router.push(`/search?${queryString}`);
 		}
 	};
 	return (
