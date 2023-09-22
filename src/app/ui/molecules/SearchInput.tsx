@@ -31,7 +31,7 @@ export const SearchInput = () => {
 		router.push(`/search?${queryString}`);
 	};
 	return (
-		<div role="searchbox">
+		<div>
 			<form onSubmit={(e) => handleSubmit(e)}>
 				<input
 					className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
@@ -39,6 +39,7 @@ export const SearchInput = () => {
 					type="text"
 					placeholder="Search"
 					value={search}
+					role="searchbox"
 					onChange={(event) => setSearch(event.target.value)}
 				/>
 			</form>

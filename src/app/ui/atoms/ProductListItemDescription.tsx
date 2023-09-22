@@ -11,9 +11,9 @@ export const ProductListItemDescription = ({
 	return (
 		<div className="mt-2 flex justify-between gap-3">
 			<div>
-				<h1 className="text-sm font-semibold text-gray-700">
+				<h2 className="text-sm font-semibold text-gray-700">
 					{name}
-				</h1>
+				</h2>
 				<p className="text-sm font-semibold text-gray-700">
 					{categories.map((category) => category.name)}
 				</p>
