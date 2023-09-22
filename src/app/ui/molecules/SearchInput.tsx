@@ -13,9 +13,7 @@ export const SearchInput = () => {
 	const debounceSearch = useDebounce(search, 500);
 
 	useEffect(() => {
-		if (debounceSearch === '') {
-			router.push("/products");
-		}
+		if (!debounceSearch) return;
 		router.push(`/search?query=${debounceSearch}`);
 	}, [debounceSearch, router]);
 
@@ -31,7 +29,7 @@ export const SearchInput = () => {
 		router.push(`/search?${queryString}`);
 	};
 	return (
-		<>
+		<div role="searchbox">
 			<form onSubmit={(e) => handleSubmit(e)}>
 				<input
 					className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
@@ -42,6 +40,6 @@ export const SearchInput = () => {
 					onChange={(event) => setSearch(event.target.value)}
 				/>
 			</form>
-		</>
+		</div>
 	);
 };
