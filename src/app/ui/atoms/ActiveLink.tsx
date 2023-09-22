@@ -29,6 +29,7 @@ export const ActiveLink = ({
 		<Link
 			href={href}
 			className={clsx(className, isActive && activeClassName)}
+			aria-current={isActive ? "page" : undefined}
 		>
 			{children}
 		</Link>
