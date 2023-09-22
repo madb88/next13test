@@ -14,13 +14,15 @@ export const SearchInput = () => {
 
 	useEffect(() => {
 		if (!debounceSearch) return;
-		router.push(`/search?query=${debounceSearch}`);
+		router.push(
+			`/search?query=${encodeURIComponent(debounceSearch)}`,
+		);
 	}, [debounceSearch, router]);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		const queryParams = {
-			query: search,
+			query: encodeURIComponent(search),
 		};
 
 		const queryString = new URLSearchParams(queryParams).toString();

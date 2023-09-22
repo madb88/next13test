@@ -13,6 +13,7 @@ export const generateMetadata = async ({
 		title: params.categoryName,
 	};
 };
+
 export default async function ProductDetailsPage({
 	params,
 }: {
@@ -34,6 +35,7 @@ export default async function ProductDetailsPage({
 
 	return (
 		<>
+			<h2>{params.categoryName}</h2>
 			<ProductList products={productsByCategory[0].products} />
 			<Pagination
 				count={productsByCategoryAll[0].products.length}
