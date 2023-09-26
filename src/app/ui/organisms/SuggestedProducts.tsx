@@ -10,13 +10,13 @@ export const SuggestedProducts = async ({
 }: SuggestedProductsProps) => {
 	const categories = await getProductsByCategoryName(categoryName, 4);
 
-	if (!categories[0]) {
+	if (!categories) {
 		return <>There are no similar products for this category</>;
 	}
 
 	return (
 		<div data-testid="related-products">
-			<ProductList products={categories[0].products} />;
+			<ProductList products={categories.products} />
 		</div>
 	);
 };
