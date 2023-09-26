@@ -41,9 +41,13 @@ export const Product = ({ product }: ProductProps) => {
 			<aside>
 				<Suspense fallback={<Loader />}>
 					{product.categories[0] && (
-						<SuggestedProducts
-							categoryName={product.categories[0].name}
-						/>
+						<Suspense fallback={<Loader />}>
+							<>
+								<SuggestedProducts
+									categoryName={product.categories[0].name}
+								/>
+							</>
+						</Suspense>
 					)}
 				</Suspense>
 			</aside>
