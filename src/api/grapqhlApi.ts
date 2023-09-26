@@ -11,7 +11,7 @@ export const executeGraphqlQuery = async <TResult, TVariables>(
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: `Bearer ${process.env.GRAPHQL_TOKEN}`,
+			// Authorization: `Bearer ${process.env.GRAPHQL_TOKEN}`,
 		},
 		body: JSON.stringify({
 			query,
