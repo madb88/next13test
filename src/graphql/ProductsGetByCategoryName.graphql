@@ -3,9 +3,21 @@ query ProductsGetByCategoryName(
 	$first: Int
 	$skip: Int
 ) {
-	categories(where: { name: $categoryName }) {
-		products(first: $first, skip: $skip) {
-			...ProductListItemFragment
+	products(
+		first: $first
+		skip: $skip
+		where: { categories_some: { name: $categoryName } }
+	) {
+		...ProductListItemFragment
+	}
+	productsConnection(
+		where: { categories_some: { name: $categoryName } }
+	) {
+		aggregate {
+			count
+		}
+		pageInfo {
+			pageSize
 		}
 	}
 }

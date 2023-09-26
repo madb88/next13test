@@ -41,7 +41,10 @@ export const getProductsByCategoryName = async (
 		{ categoryName: categoryName, first: first, skip: skip },
 	);
 
-	return graphqlResponse.categories;
+	return {
+		products: graphqlResponse.products,
+		count: graphqlResponse.productsConnection.aggregate.count,
+	};
 };
 
 export const getProductsByName = async (name: string) => {

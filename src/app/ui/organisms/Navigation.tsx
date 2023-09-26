@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { type Route } from "next";
 import { ActiveLink } from "../atoms/ActiveLink";
 import { SearchInput } from "../molecules/SearchInput";
@@ -62,6 +63,9 @@ export default async function Navigation({}) {
 								<SearchInput />
 							</div>
 						</div>
+					</div>
+					<div>
+						<ActiveLink href="/cart">Koszyk</ActiveLink>
 					</div>
 				</div>
 			</div>

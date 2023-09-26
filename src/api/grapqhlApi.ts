@@ -11,6 +11,7 @@ export const executeGraphqlQuery = async <TResult, TVariables>(
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${process.env.GRAPHQL_TOKEN}`,
 		},
 		body: JSON.stringify({
 			query,
@@ -26,6 +27,7 @@ export const executeGraphqlQuery = async <TResult, TVariables>(
 		(await res.json()) as GraphqlResponse<TResult>;
 
 	if (graphqlResponse.errors) {
+		console.log(graphqlResponse);
 		throw TypeError(`GraphQL Error`, {
 			cause: graphqlResponse.errors,
 		});

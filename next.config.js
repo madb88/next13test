@@ -5,6 +5,9 @@ const nextConfig = {
 	experimental: {
 		typedRoutes: true,
 		mdxRs: true,
+		serverActions: true,
+		workerThreads: false,
+		cpus: 1,
 	},
 	images: {
 		domains: ["media.graphassets.com", "naszsklep-api.vercel.app"],
