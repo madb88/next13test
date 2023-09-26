@@ -3,6 +3,7 @@ import { type TypedDocumentString } from "@/gql/graphql";
 export const executeGraphqlQuery = async <TResult, TVariables>(
 	query: TypedDocumentString<TResult, TVariables>,
 	variables: TVariables,
+	isMutation = false,
 ): Promise<TResult> => {
 	if (!process.env.GRAPHQL_URL)
 		throw new Error("GRAPHQL_URL is not defined");
@@ -11,6 +12,11 @@ export const executeGraphqlQuery = async <TResult, TVariables>(
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${
+				isMutation
+					? process.env.MUTATION_TOKEN
+					: process.env.GRAPHQL_TOKEN
+			}`,
 		},
 		body: JSON.stringify({
 			query,
@@ -26,6 +32,7 @@ export const executeGraphqlQuery = async <TResult, TVariables>(
 		(await res.json()) as GraphqlResponse<TResult>;
 
 	if (graphqlResponse.errors) {
+		console.log(graphqlResponse);
 		throw TypeError(`GraphQL Error`, {
 			cause: graphqlResponse.errors,
 		});

@@ -21,24 +21,20 @@ export default async function ProductDetailsPage({
 }) {
 	const offset = (Number(params.pageNumber) - 1) * 4;
 
-	const productsByCategoryAll = await getProductsByCategoryName(
-		params.categoryName,
-	);
-
 	const productsByCategory = await getProductsByCategoryName(
 		params.categoryName,
 		4,
 		offset,
 	);
 
-	if (!productsByCategory[0] || !productsByCategoryAll[0]) notFound();
+	if (!productsByCategory.products) notFound();
 
 	return (
 		<>
 			<h2>{params.categoryName}</h2>
-			<ProductList products={productsByCategory[0].products} />
+			<ProductList products={productsByCategory.products} />
 			<Pagination
-				count={productsByCategoryAll[0].products.length}
+				count={productsByCategory.count}
 				pageSize={4}
 				link={`/categories/${params.categoryName}/`}
 			/>
