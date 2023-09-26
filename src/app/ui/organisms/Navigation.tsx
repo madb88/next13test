@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { type Route } from "next";
+import { Suspense } from "react";
 import { ActiveLink } from "../atoms/ActiveLink";
 import { SearchInput } from "../molecules/SearchInput";
 import { getCategoriesList } from "@/api/categories";
@@ -60,7 +61,9 @@ export default async function Navigation({}) {
 						</label>
 						<div className="relative">
 							<div className=" absolute inset-y-0 left-0 flex items-center pl-3">
-								<SearchInput />
+								<Suspense fallback={<div>Loading...</div>}>
+									<SearchInput />
+								</Suspense>
 							</div>
 						</div>
 					</div>
