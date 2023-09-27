@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { formatMoney } from "../utils";
 import { IncrementProductQuantity } from "./IncrementProductQuantity";
+import { RemoveButton } from "./RemoveButton";
 import { getCartFromCookies } from "@/api/cart";
 
 export default async function CartPage() {
@@ -16,6 +17,7 @@ export default async function CartPage() {
 					<tr>Product</tr>
 					<tr className="">Quantity</tr>
 					<tr>Price</tr>
+					<tr></tr>
 				</thead>
 				<tbody>
 					{cart.orderItems.map(
@@ -30,6 +32,9 @@ export default async function CartPage() {
 										/>
 									</td>
 									<td>{formatMoney(item.product.price / 100)}</td>
+									<td>
+										<RemoveButton itemId={item.id} />
+									</td>
 								</tr>
 							),
 					)}
