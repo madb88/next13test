@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 import { SuggestedProducts } from "../organisms/SuggestedProducts";
 import Loader from "./Loader";
 import { ProductCoverImage } from "./ProductCoverImage";
@@ -16,10 +16,10 @@ export const Product = ({ product }: ProductProps) => {
 	async function addToCartAction() {
 		"use server";
 		const cart = await getOrCreateCart();
-		cookies().set("cartId", cart.id, {
-			httpOnly: true,
-		});
 		await addItemToCart(cart.id, product.id);
+
+		//revalidate
+		revalidateTag("cart");
 	}
 
 	return (

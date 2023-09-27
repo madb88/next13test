@@ -20,19 +20,26 @@ export async function getOrCreateCart(): Promise<CartFragment> {
 		throw new Error("Failed to create cart");
 	}
 
+	cookies().set("cartId", cart.createOrder.id, {
+		httpOnly: true,
+	});
+
 	return cart.createOrder;
 }
 
 export async function getCartFromCookies() {
 	const cartId = cookies().get("cartId")?.value;
 	if (cartId) {
-		const cart = await executeGraphqlQuery(
-			CartGetByIdDocument,
-			{
+		const cart = await executeGraphqlQuery({
+			query: CartGetByIdDocument,
+			variables: {
 				id: cartId,
 			},
-			true,
-		);
+			next: {
+				tags: ["cart"],
+			},
+			isMutation: true,
+		});
 		if (cart.order) {
 			return cart.order;
 		}
@@ -40,29 +47,33 @@ export async function getCartFromCookies() {
 }
 
 export function createCart() {
-	return executeGraphqlQuery(CartCreateDocument, {}, true);
+	return executeGraphqlQuery({
+		query: CartCreateDocument,
+		variables: {},
+		isMutation: true,
+	});
 }
 
 export async function addItemToCart(
 	orderId: string,
 	productId: string,
 ) {
-	const { product } = await executeGraphqlQuery(
-		ProductGetByIdDocument,
-		{
+	const { product } = await executeGraphqlQuery({
+		query: ProductGetByIdDocument,
+		variables: {
 			id: productId,
 		},
-	);
+	});
 	if (!product) {
 		throw new Error("Product not found");
 	}
-	await executeGraphqlQuery(
-		CartAddProductDocument,
-		{
+	await executeGraphqlQuery({
+		query: CartAddProductDocument,
+		variables: {
 			orderId,
 			productId,
 			total: product.price,
 		},
-		true,
-	);
+		isMutation: true,
+	});
 }

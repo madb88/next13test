@@ -7,8 +7,11 @@ export const changeItemQuantity = (
 	itemId: string,
 	quantity: number,
 ) => {
-	return executeGraphqlQuery(CartSetItemQuantityDocument, {
-		itemId,
-		quantity,
+	return executeGraphqlQuery({
+		query: CartSetItemQuantityDocument,
+		variables: {
+			itemId,
+			quantity,
+		},
 	});
 };

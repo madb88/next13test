@@ -11,10 +11,10 @@ export const getProductsListNew = async (
 	first?: number,
 	skip?: number,
 ) => {
-	const graphqlResponse = await executeGraphqlQuery(
-		ProductsGetListDocument,
-		{ first: first, skip: skip },
-	);
+	const graphqlResponse = await executeGraphqlQuery({
+		query: ProductsGetListDocument,
+		variables: { first: first, skip: skip },
+	});
 
 	return {
 		products: graphqlResponse.products,
@@ -23,10 +23,10 @@ export const getProductsListNew = async (
 };
 
 export const getProductById = async (id: string) => {
-	const graphqlResponse = await executeGraphqlQuery(
-		ProductGetByIdDocument,
-		{ id: id },
-	);
+	const graphqlResponse = await executeGraphqlQuery({
+		query: ProductGetByIdDocument,
+		variables: { id: id },
+	});
 
 	return graphqlResponse.product;
 };
@@ -36,10 +36,14 @@ export const getProductsByCategoryName = async (
 	first?: number,
 	skip?: number,
 ) => {
-	const graphqlResponse = await executeGraphqlQuery(
-		ProductsGetByCategoryNameDocument,
-		{ categoryName: categoryName, first: first, skip: skip },
-	);
+	const graphqlResponse = await executeGraphqlQuery({
+		query: ProductsGetByCategoryNameDocument,
+		variables: {
+			categoryName: categoryName,
+			first: first,
+			skip: skip,
+		},
+	});
 
 	return {
 		products: graphqlResponse.products,
@@ -48,10 +52,10 @@ export const getProductsByCategoryName = async (
 };
 
 export const getProductsByName = async (name: string) => {
-	const graphqlResponse = await executeGraphqlQuery(
-		ProductsSearchByNameDocument,
-		{ name: name },
-	);
+	const graphqlResponse = await executeGraphqlQuery({
+		query: ProductsSearchByNameDocument,
+		variables: { name: name },
+	});
 
 	return graphqlResponse.products;
 };
@@ -59,10 +63,10 @@ export const getProductsByName = async (name: string) => {
 export const getProductsByCollectionName = async (
 	collectionName: string,
 ) => {
-	const graphqlResponse = await executeGraphqlQuery(
-		ProductsGetByCollectionNameDocument,
-		{ collectionName: decodeURIComponent(collectionName) },
-	);
+	const graphqlResponse = await executeGraphqlQuery({
+		query: ProductsGetByCollectionNameDocument,
+		variables: { collectionName: decodeURIComponent(collectionName) },
+	});
 
 	return graphqlResponse.collections;
 };
