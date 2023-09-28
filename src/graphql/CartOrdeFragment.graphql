@@ -7,6 +7,11 @@ fragment Cart on Order {
 			id
 			name
 			price
+			description
+			images {
+				id
+				url
+			}
 		}
 	}
 }

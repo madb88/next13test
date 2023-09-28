@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { formatMoney } from "../utils";
 import { IncrementProductQuantity } from "./IncrementProductQuantity";
 import { RemoveButton } from "./RemoveButton";
+import { handlePaymentAction } from "./actions";
 import { getCartFromCookies } from "@/api/cart";
 
 export default async function CartPage() {
@@ -14,10 +15,18 @@ export default async function CartPage() {
 		<div className="mt-10">
 			<table className="table-fixed">
 				<thead>
-					<tr>Product</tr>
-					<tr className="">Quantity</tr>
-					<tr>Price</tr>
-					<tr></tr>
+					<tr>
+						<th>Product</th>
+					</tr>
+					<tr className="">
+						<th>Quantity </th>
+					</tr>
+					<tr>
+						<th>Price</th>
+					</tr>
+					<tr>
+						<th></th>
+					</tr>
 				</thead>
 				<tbody>
 					{cart.orderItems.map(
@@ -40,6 +49,11 @@ export default async function CartPage() {
 					)}
 				</tbody>
 			</table>
+			<form action={handlePaymentAction}>
+				<button className="mt-4 w-full max-w-xs rounded-md border bg-slate-950 py-2 text-white shadow-sm transition-colors hover:bg-slate-800">
+					Pay
+				</button>
+			</form>
 		</div>
 	);
 }
