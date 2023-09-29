@@ -19,10 +19,37 @@ export default async function OpenGraphImage({
 		if (!product) return new ImageResponse(<div>NextJs</div>);
 
 		console.log(product);
-		return new ImageResponse(<div>NextJs {product.name}</div>);
+		return new ImageResponse(
+			(
+				<div
+					style={{
+						fontSize: 12,
+						background: "white",
+						width: "100%",
+						height: "100%",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+					}}
+				>
+					{product.images.map((image) => (
+						<img
+							key={image.url}
+							width={320}
+							height={320}
+							alt={alt}
+							src={image.url}
+							className="h-full w-full object-cover object-center p-4 hover:scale-105"
+						/>
+					))}
+					<p>Name: {product.name}</p>
+					<p>Description: {product.description}</p>
+					Categories:{" "}
+					{product.categories.map((category) => (
+						<div key={category.name}>{category.name}</div>
+					))}
+				</div>
+			),
+		);
 	}
 }
-
-// export default function OpenGraphImage({}: {}) {
-// 	return new ImageResponse(<div>NextJs</div>);
-// }
