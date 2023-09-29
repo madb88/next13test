@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Navigation from "./ui/organisms/Navigation";
 
-// const inter = Inter({ subsets: ["latin", "latin-ext"] });
-
 const montserrat = Montserrat({
 	subsets: ["latin", "latin-ext"],
 });
@@ -15,11 +13,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
 	children,
+	modal,
 }: {
 	children: React.ReactNode;
+	modal?: React.ReactNode;
 }) {
 	return (
 		<html lang="en">
+			{modal}
 			<body className={montserrat.className}>
 				<header className="sticky top-0 z-20 border-b bg-white bg-opacity-60 backdrop-blur-lg">
 					<Navigation />
