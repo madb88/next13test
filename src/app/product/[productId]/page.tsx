@@ -15,6 +15,7 @@ export const generateMetadata = async ({
 		description: product && product.description,
 		openGraph: {
 			title: (product && product.name) || "",
+			description: (product && product.description) || "",
 			images: [
 				{
 					url: (product && product.images[0]?.url) || "",
