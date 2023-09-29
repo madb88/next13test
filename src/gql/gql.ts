@@ -27,6 +27,7 @@ const documents = {
     "query ProductsGetByCollectionName($collectionName: String!) {\n  collections(where: {name_contains: $collectionName}) {\n    products {\n      ...ProductListItemFragment\n    }\n  }\n}": types.ProductsGetByCollectionNameDocument,
     "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItemFragment\n  }\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetListDocument,
     "query ProductsSearchByName($name: String!) {\n  products(where: {name_contains: $name}) {\n    id\n    name\n    categories(first: 1) {\n      name\n    }\n    images(first: 4) {\n      url\n    }\n    price\n  }\n}": types.ProductsSearchByNameDocument,
+    "query ReviewsForProduct($product: ProductWhereInput) {\n  reviews(where: {product: $product}, first: 3) {\n    headline\n    id\n    content\n    rating\n    name\n    email\n  }\n}": types.ReviewsForProductDocument,
     "query getCategories {\n  categories {\n    id\n    name\n  }\n}": types.GetCategoriesDocument,
     "query getCollections {\n  collections {\n    id\n    name\n  }\n}": types.GetCollectionsDocument,
     "query getColorVariants {\n  productColorVariants {\n    name\n  }\n}": types.GetColorVariantsDocument,
@@ -84,6 +85,10 @@ export function graphql(source: "query ProductsGetList($first: Int, $skip: Int) 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductsSearchByName($name: String!) {\n  products(where: {name_contains: $name}) {\n    id\n    name\n    categories(first: 1) {\n      name\n    }\n    images(first: 4) {\n      url\n    }\n    price\n  }\n}"): typeof import('./graphql').ProductsSearchByNameDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query ReviewsForProduct($product: ProductWhereInput) {\n  reviews(where: {product: $product}, first: 3) {\n    headline\n    id\n    content\n    rating\n    name\n    email\n  }\n}"): typeof import('./graphql').ReviewsForProductDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

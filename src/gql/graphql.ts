@@ -10827,6 +10827,13 @@ export type ProductsSearchByNameQueryVariables = Exact<{
 
 export type ProductsSearchByNameQuery = { products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
+export type ReviewsForProductQueryVariables = Exact<{
+  product?: InputMaybe<ProductWhereInput>;
+}>;
+
+
+export type ReviewsForProductQuery = { reviews: Array<{ headline: string, id: string, content: string, rating: number, name: string, email: string }> };
+
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -11074,6 +11081,18 @@ export const ProductsSearchByNameDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ProductsSearchByNameQuery, ProductsSearchByNameQueryVariables>;
+export const ReviewsForProductDocument = new TypedDocumentString(`
+    query ReviewsForProduct($product: ProductWhereInput) {
+  reviews(where: {product: $product}, first: 3) {
+    headline
+    id
+    content
+    rating
+    name
+    email
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewsForProductQuery, ReviewsForProductQueryVariables>;
 export const GetCategoriesDocument = new TypedDocumentString(`
     query getCategories {
   categories {

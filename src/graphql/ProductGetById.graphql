@@ -3,3 +3,24 @@ query ProductGetById($id: ID) {
 		...ProductFragment
 	}
 }
+
+# query ProductGetById($id: ID) {
+# 	product(where: { id: $id }) {
+# 			id
+# 	name
+# 	description
+# 	categories(first: 1) {
+# 		name
+# 	}
+# 	images(first: 4) {
+# 		url
+# 	}
+#     reviews {
+#     id
+#       headline
+#       content
+#       rating
+#     }
+# 	price
+# }
+# 	}

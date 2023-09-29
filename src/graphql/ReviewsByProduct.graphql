@@ -1,0 +1,10 @@
+query ReviewsForProduct($product: ProductWhereInput) {
+	reviews(where: { product: $product }, first: 3) {
+		headline
+		id
+		content
+		rating
+		name
+		email
+	}
+}

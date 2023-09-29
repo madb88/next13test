@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { revalidateTag } from "next/cache";
 import { SuggestedProducts } from "../organisms/SuggestedProducts";
+import { ReviewsForm } from "../organisms/ReviewsForm";
+import { Reviews } from "../organisms/Reviews";
 import Loader from "./Loader";
 import { ProductCoverImage } from "./ProductCoverImage";
 import { ProductDescription } from "./ProductDescription";
@@ -37,6 +39,15 @@ export const Product = ({ product }: ProductProps) => {
 						<AddToCartButton />
 					</form>
 				</section>
+			</article>
+			<article>
+				<h4>Reviews</h4>
+				<Suspense fallback={<Loader />}>
+					<Reviews product={product} />
+				</Suspense>
+			</article>
+			<article className="flex gap-3">
+				<ReviewsForm />
 			</article>
 			<aside>
 				<Suspense fallback={<Loader />}>
