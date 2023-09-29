@@ -13,18 +13,18 @@ export const generateMetadata = async ({
 	return {
 		title: product && product.name,
 		description: product && product.description,
-		openGraph: {
-			title: (product && product.name) || "",
-			description: (product && product.description) || "",
-			images: [
-				{
-					url: (product && product.images[0]?.url) || "",
-					width: 800,
-					height: 600,
-					alt: (product && product.name) || "",
-				},
-			],
-		},
+		// openGraph: {
+		// 	title: (product && product.name) || "",
+		// 	description: (product && product.description) || "",
+		// 	images: [
+		// 		{
+		// 			url: (product && product.images[0]?.url) || "",
+		// 			width: 800,
+		// 			height: 600,
+		// 			alt: (product && product.name) || "",
+		// 		},
+		// 	],
+		// },
 	};
 };
 
