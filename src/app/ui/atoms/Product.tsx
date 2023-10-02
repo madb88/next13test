@@ -2,19 +2,21 @@ import { Suspense } from "react";
 import { revalidateTag } from "next/cache";
 import { SuggestedProducts } from "../organisms/SuggestedProducts";
 import { ReviewsForm } from "../organisms/ReviewsForm";
-import { Reviews } from "../organisms/Reviews";
 import Loader from "./Loader";
 import { ProductCoverImage } from "./ProductCoverImage";
 import { ProductDescription } from "./ProductDescription";
 import { AddToCartButton } from "./AddToCartButton";
 import { type ProductFragmentFragment } from "@/gql/graphql";
 import { getOrCreateCart, addItemToCart } from "@/api/cart";
+import { getReviewsByProduct } from "@/api/reviews";
 
 type ProductProps = {
 	product: ProductFragmentFragment;
 };
 
-export const Product = ({ product }: ProductProps) => {
+export const Product = async ({ product }: ProductProps) => {
+	const reviews = await getReviewsByProduct(product);
+
 	async function addToCartAction() {
 		"use server";
 		const cart = await getOrCreateCart();
@@ -40,14 +42,8 @@ export const Product = ({ product }: ProductProps) => {
 					</form>
 				</section>
 			</article>
-			<article>
-				<h4>Reviews</h4>
-				<Suspense fallback={<Loader />}>
-					<Reviews product={product} />
-				</Suspense>
-			</article>
 			<article className="flex gap-3">
-				<ReviewsForm />
+				<ReviewsForm productId={product.id} reviews={reviews} />
 			</article>
 			<aside>
 				<Suspense fallback={<Loader />}>

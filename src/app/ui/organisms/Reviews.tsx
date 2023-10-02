@@ -1,12 +1,10 @@
-import { getReviewsByProduct } from "@/api/reviews";
-import { type ProductFragmentFragment } from "@/gql/graphql";
+import { type ReviewProps } from "./ReviewsForm";
 
 export const Reviews = async ({
-	product,
+	reviews,
 }: {
-	product: ProductFragmentFragment;
+	reviews: ReviewProps[];
 }) => {
-	const reviews = await getReviewsByProduct(product);
 	if (!reviews) {
 		return <p>No reviews</p>;
 	}

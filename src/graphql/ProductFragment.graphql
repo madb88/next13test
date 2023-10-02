@@ -10,5 +10,3 @@ fragment ProductFragment on Product {
 	}
 	price
 }
-
-# ckdu44mn40gxh010405uwgbtw

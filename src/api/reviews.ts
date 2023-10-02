@@ -9,9 +9,33 @@ export const getReviewsByProduct = async (
 ) => {
 	const graphqlResponse = await executeGraphqlQuery({
 		query: ReviewsForProductDocument,
+		next: {
+			tags: ["reviews"],
+		},
 		variables: { product: { id: product.id } },
 	});
 
-	console.log(graphqlResponse);
 	return graphqlResponse.reviews;
 };
+
+// export async function addReview(
+// 	headline: string,
+// 	name: string,
+// 	content: string,
+// 	rating: number,
+// 	productId: string,
+// 	email: string,
+// ) {
+// 	await executeGraphqlQuery({
+// 		query: ReviewCreateDocument,
+// 		variables: {
+// 			headline,
+// 			name,
+// 			content,
+// 			rating,
+// 			productId,
+// 			email,
+// 		},
+// 		isMutation: true,
+// 	});
+// }

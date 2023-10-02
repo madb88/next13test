@@ -10827,6 +10827,20 @@ export type ProductsSearchByNameQueryVariables = Exact<{
 
 export type ProductsSearchByNameQuery = { products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
+export type ReviewCreateMutationVariables = Exact<{
+  headline: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  content: Scalars['String']['input'];
+  rating: Scalars['Int']['input'];
+  productId: Scalars['ID']['input'];
+  email: Scalars['String']['input'];
+}>;
+
+
+export type ReviewCreateMutation = { createReview?: { headline: string, name: string, content: string, rating: number, email: string, id: string } | null };
+
+export type ReviewFragmentFragment = { headline: string, name: string, content: string, rating: number, email: string };
+
 export type ReviewsForProductQueryVariables = Exact<{
   product?: InputMaybe<ProductWhereInput>;
 }>;
@@ -10909,6 +10923,15 @@ export const ProductListItemFragmentFragmentDoc = new TypedDocumentString(`
   price
 }
     `, {"fragmentName":"ProductListItemFragment"}) as unknown as TypedDocumentString<ProductListItemFragmentFragment, unknown>;
+export const ReviewFragmentFragmentDoc = new TypedDocumentString(`
+    fragment ReviewFragment on Review {
+  headline
+  name
+  content
+  rating
+  email
+}
+    `, {"fragmentName":"ReviewFragment"}) as unknown as TypedDocumentString<ReviewFragmentFragment, unknown>;
 export const CartAddProductDocument = new TypedDocumentString(`
     mutation CartAddProduct($orderId: ID!, $productId: ID!, $total: Int!) {
   createOrderItem(
@@ -11081,9 +11104,23 @@ export const ProductsSearchByNameDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ProductsSearchByNameQuery, ProductsSearchByNameQueryVariables>;
+export const ReviewCreateDocument = new TypedDocumentString(`
+    mutation ReviewCreate($headline: String!, $name: String!, $content: String!, $rating: Int!, $productId: ID!, $email: String!) {
+  createReview(
+    data: {headline: $headline, name: $name, content: $content, rating: $rating, product: {connect: {id: $productId}}, email: $email}
+  ) {
+    headline
+    name
+    content
+    rating
+    email
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewCreateMutation, ReviewCreateMutationVariables>;
 export const ReviewsForProductDocument = new TypedDocumentString(`
     query ReviewsForProduct($product: ProductWhereInput) {
-  reviews(where: {product: $product}, first: 3) {
+  reviews(where: {product: $product}, last: 3, stage: DRAFT) {
     headline
     id
     content

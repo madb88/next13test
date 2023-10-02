@@ -1,5 +1,5 @@
 query ReviewsForProduct($product: ProductWhereInput) {
-	reviews(where: { product: $product }, first: 3) {
+	reviews(where: { product: $product }, last: 3, stage: DRAFT) {
 		headline
 		id
 		content
