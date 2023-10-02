@@ -13,8 +13,20 @@ export const IncrementProductQuantity = ({
 		useOptimistic(quantity);
 	return (
 		<form>
-			{optimisticQuantity}
 			<button
+				disabled={optimisticQuantity === 0}
+				data-testid="decrement"
+				formAction={async () => {
+					setOptimisticQuantity(optimisticQuantity - 1);
+					await changeItemQuantity(itemId, optimisticQuantity - 1);
+				}}
+				className="mr-2 h-8 w-8 border bg-slate-50"
+			>
+				-
+			</button>
+			<div data-testid="quantity">{optimisticQuantity}</div>
+			<button
+				data-testid="increment"
 				formAction={async () => {
 					setOptimisticQuantity(optimisticQuantity + 1);
 					await changeItemQuantity(itemId, optimisticQuantity + 1);

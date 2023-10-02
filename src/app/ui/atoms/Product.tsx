@@ -20,6 +20,7 @@ export const Product = async ({ product }: ProductProps) => {
 	async function addToCartAction() {
 		"use server";
 		const cart = await getOrCreateCart();
+
 		await addItemToCart(cart.id, product.id);
 
 		//revalidate

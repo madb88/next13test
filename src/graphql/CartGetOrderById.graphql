@@ -1,0 +1,11 @@
+query CartGetOrderById($orderId: ID!) {
+	order(where: { id: $orderId }) {
+		orderItems {
+			quantity
+			id
+			product {
+				name
+			}
+		}
+	}
+}

@@ -75,7 +75,7 @@ export default async function Navigation({}) {
 						<span className="ml-2 text-sm font-medium">
 							{quantity}
 						</span>
-						<ActiveLink href="/cart">
+						<ActiveLink href="/cart/sidebar">
 							<ShoppingCart className="h-6 w-6 flex-shrink-0" />
 						</ActiveLink>
 					</div>

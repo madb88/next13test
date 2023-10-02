@@ -6,6 +6,8 @@ import {
 	CartCreateDocument,
 	ProductGetByIdDocument,
 	CartAddProductDocument,
+	CartGetOrderByIdDocument,
+	CartSetItemQuantityDocument,
 } from "@/gql/graphql";
 
 export async function getOrCreateCart(): Promise<CartFragment> {
@@ -25,6 +27,21 @@ export async function getOrCreateCart(): Promise<CartFragment> {
 	});
 
 	return cart.createOrder;
+}
+
+export async function getOrderById(orderId: string) {
+	const { order } = await executeGraphqlQuery({
+		query: CartGetOrderByIdDocument,
+		variables: {
+			orderId: orderId,
+		},
+	});
+
+	if (!order) {
+		throw new Error("Failed to fetch order");
+	}
+
+	return order.orderItems;
 }
 
 export async function getCartFromCookies() {
@@ -70,6 +87,25 @@ export async function addItemToCart(
 	if (!product) {
 		throw new Error("Product not found");
 	}
+
+	const existingOrder = await getCartFromCookies();
+	if (existingOrder) {
+		const existingItem = existingOrder.orderItems.find(
+			(i) => i.product?.id === productId,
+		);
+		if (existingItem) {
+			return executeGraphqlQuery({
+				query: CartSetItemQuantityDocument,
+				variables: {
+					itemId: existingItem.id,
+					quantity: existingItem.quantity + 1,
+				},
+				cache: "no-store",
+				isMutation: true,
+			});
+		}
+	}
+
 	await executeGraphqlQuery({
 		query: CartAddProductDocument,
 		variables: {
