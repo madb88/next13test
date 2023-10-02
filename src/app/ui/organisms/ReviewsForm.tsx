@@ -14,7 +14,6 @@ export type ReviewProps = {
 	name: string;
 	email: string;
 	id?: string;
-	productId: string;
 };
 
 type ReviewsFormPropst = {
@@ -79,7 +78,6 @@ export const ReviewsForm = ({
 							headline: data.get("headline") as string,
 							content: data.get("content") as string,
 							rating: parseInt(data.get("rating") as string),
-							productId: productId,
 							email: data.get("email") as string,
 						};
 						setOptimisticReviews([...optimisticReviews, newReview]);
@@ -88,7 +86,7 @@ export const ReviewsForm = ({
 							newReview.headline,
 							newReview.content,
 							newReview.rating,
-							newReview.productId,
+							productId,
 							newReview.email,
 						);
 					}}
