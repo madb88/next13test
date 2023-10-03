@@ -36,7 +36,7 @@ export const ReviewsForm = ({
 					<Reviews reviews={optimisticReviews} />
 				</Suspense>
 			</div>
-			<h1>Add review</h1>
+			<p>Add review</p>
 			<form
 				className="flex flex-col gap-5"
 				data-testid="add-review-form"
