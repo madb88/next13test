@@ -1,3 +1,4 @@
+import { Variants } from "../molecules/Variants";
 import { type ProductFragmentFragment } from "@/gql/graphql";
 import { formatMoney } from "@/app/utils";
 
@@ -18,6 +19,24 @@ export const ProductDescription = ({
 				<span className="sr-only">Cena:</span>
 				{formatMoney(product.price / 100)}$
 			</h3>
+			<p>
+				Color:{" "}
+				<Variants
+					variants={[
+						{ id: "1", name: "Yellow" },
+						{ id: "2", name: "Blue" },
+					]}
+				/>
+			</p>
+			<p>
+				Size:{" "}
+				<Variants
+					variants={[
+						{ id: "1", name: "S" },
+						{ id: "2", name: "M" },
+					]}
+				/>
+			</p>
 		</div>
 	);
 };
