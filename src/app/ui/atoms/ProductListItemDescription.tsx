@@ -22,7 +22,6 @@ export const ProductListItemDescription = ({
 				className="text-sm font-medium text-gray-900"
 				data-testid="product-price"
 			>
-				<span className="sr-only">Cena:</span>{" "}
 				{formatMoney(price / 100)}$
 			</p>
 		</div>

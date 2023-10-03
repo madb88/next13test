@@ -21,12 +21,16 @@ export const Sorting = () => {
 	};
 
 	return (
-		<select data-testid="sort-by-price" onChange={handleChange}>
+		<select onChange={handleChange}>
 			<option selected disabled value="">
 				Sort by price
 			</option>
-			<option value="price_ASC">Price ASC</option>
-			<option value="price_DESC">Price DESC</option>
+			<option data-testid="sort-by-price" value="price_ASC">
+				Price ASC
+			</option>
+			<option data-testid="sort-by-price" value="price_DESC">
+				Price DESC
+			</option>
 		</select>
 	);
 };
