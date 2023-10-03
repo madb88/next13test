@@ -18,7 +18,10 @@ export const ProductListItemDescription = ({
 					{categories.map((category) => category.name)}
 				</p>
 			</div>
-			<p className="text-sm font-medium text-gray-900">
+			<p
+				className="text-sm font-medium text-gray-900"
+				data-testid="product-price"
+			>
 				<span className="sr-only">Cena:</span>{" "}
 				{formatMoney(price / 100)}$
 			</p>

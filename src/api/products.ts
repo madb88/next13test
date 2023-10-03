@@ -1,6 +1,7 @@
 import { executeGraphqlQuery } from "./grapqhlApi";
 import {
 	ProductGetByIdDocument,
+	type ProductOrderByInput,
 	ProductsGetByCategoryNameDocument,
 	ProductsGetByCollectionNameDocument,
 	ProductsGetListDocument,
@@ -10,10 +11,11 @@ import {
 export const getProductsListNew = async (
 	first?: number,
 	skip?: number,
+	order?: ProductOrderByInput,
 ) => {
 	const graphqlResponse = await executeGraphqlQuery({
 		query: ProductsGetListDocument,
-		variables: { first: first, skip: skip },
+		variables: { first: first, skip: skip, orderBy: order },
 		next: {
 			revalidate: 15,
 		},

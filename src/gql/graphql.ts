@@ -10830,6 +10830,7 @@ export type ProductsGetByCollectionNameQuery = { collections: Array<{ products: 
 export type ProductsGetListQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<ProductOrderByInput>;
 }>;
 
 
@@ -11103,8 +11104,8 @@ export const ProductsGetByCollectionNameDocument = new TypedDocumentString(`
   price
 }`) as unknown as TypedDocumentString<ProductsGetByCollectionNameQuery, ProductsGetByCollectionNameQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList($first: Int, $skip: Int) {
-  products(first: $first, skip: $skip) {
+    query ProductsGetList($first: Int, $skip: Int, $orderBy: ProductOrderByInput) {
+  products(first: $first, skip: $skip, orderBy: $orderBy) {
     ...ProductListItemFragment
   }
   productsConnection {

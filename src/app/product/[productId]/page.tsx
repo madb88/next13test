@@ -13,10 +13,10 @@ export const generateMetadata = async ({
 	return {
 		title: product && product.name,
 		description: product && product.description,
-		openGraph: {
-			title: (product && product.name) || "",
-			description: (product && product.description) || "",
-		},
+		// openGraph: {
+		// 	title: (product && product.name) || "",
+		// 	description: (product && product.description) || "",
+		// },
 	};
 };
 

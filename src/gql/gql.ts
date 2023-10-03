@@ -27,7 +27,7 @@ const documents = {
     "fragment ProductListItemFragment on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n}": types.ProductListItemFragmentFragmentDoc,
     "query ProductsGetByCategoryName($categoryName: String!, $first: Int, $skip: Int) {\n  products(\n    first: $first\n    skip: $skip\n    where: {categories_some: {name: $categoryName}}\n  ) {\n    ...ProductListItemFragment\n  }\n  productsConnection(where: {categories_some: {name: $categoryName}}) {\n    aggregate {\n      count\n    }\n    pageInfo {\n      pageSize\n    }\n  }\n}": types.ProductsGetByCategoryNameDocument,
     "query ProductsGetByCollectionName($collectionName: String!) {\n  collections(where: {name_contains: $collectionName}) {\n    products {\n      ...ProductListItemFragment\n    }\n  }\n}": types.ProductsGetByCollectionNameDocument,
-    "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItemFragment\n  }\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetList($first: Int, $skip: Int, $orderBy: ProductOrderByInput) {\n  products(first: $first, skip: $skip, orderBy: $orderBy) {\n    ...ProductListItemFragment\n  }\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetListDocument,
     "query ProductsSearchByName($name: String!) {\n  products(where: {name_contains: $name}) {\n    id\n    name\n    categories(first: 1) {\n      name\n    }\n    images(first: 4) {\n      url\n    }\n    price\n  }\n}": types.ProductsSearchByNameDocument,
     "mutation ReviewCreate($headline: String!, $name: String!, $content: String!, $rating: Int!, $productId: ID!, $email: String!) {\n  createReview(\n    data: {headline: $headline, name: $name, content: $content, rating: $rating, product: {connect: {id: $productId}}, email: $email}\n  ) {\n    headline\n    name\n    content\n    rating\n    email\n    id\n  }\n}": types.ReviewCreateDocument,
     "fragment ReviewFragment on Review {\n  headline\n  name\n  content\n  rating\n  email\n}": types.ReviewFragmentFragmentDoc,
@@ -92,7 +92,7 @@ export function graphql(source: "query ProductsGetByCollectionName($collectionNa
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItemFragment\n  }\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetList($first: Int, $skip: Int, $orderBy: ProductOrderByInput) {\n  products(first: $first, skip: $skip, orderBy: $orderBy) {\n    ...ProductListItemFragment\n  }\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
