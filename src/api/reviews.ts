@@ -15,7 +15,7 @@ export const getReviewsByProduct = async (
 		variables: { product: { id: product.id } },
 	});
 
-	return graphqlResponse.reviews;
+	return graphqlResponse;
 };
 
 // export async function addReview(
