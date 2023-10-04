@@ -35,5 +35,5 @@
 		"tailwind.config.js",
 		".graphqlrc.ts"
 	],
-	"exclude": ["node_modules", "./src/middleware.ts"]
+	"exclude": ["node_modules"]
 }
