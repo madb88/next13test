@@ -13,11 +13,10 @@ export type ReviewType = {
 		id: string;
 	};
 };
-// curl -X POST --data-binary '{"data": {"headling": "test", "name":"test","content":"asdsadsds","rating":"2","email":"test222@gmail.com","product":{"id":"ckdu4ch1s0h1s01580ksoy6m5"},"id":"tee"}}' localhost:3000/api/webhook/rating
+// curl -X POST --data-binary '{"data": {"headling": "test", "name":"test","content":"asdsadsds","rating":"2","email":"test222@gmail.com","product":{"id":"cljaa4oq7afu20aw3mn0tzd43"},"id":"tee"}}' localhost:3000/api/webhook/rating
 
 export async function POST(request: NextRequest): Promise<Response> {
 	const body = (await request.json()) as ReviewType;
-	console.log(body);
 	if (body && body.data && body.data.product.id) {
 		let averageRating = 0;
 
@@ -29,19 +28,13 @@ export async function POST(request: NextRequest): Promise<Response> {
 			return acc + edge.rating;
 		}, 0);
 
-		console.log(total);
-		console.log(reviewsConnection.aggregate.count);
-		averageRating = Math.floor(
-			total / reviewsConnection.aggregate.count,
-		);
-
-		console.log(averageRating);
+		(averageRating = total / reviewsConnection.aggregate.count),
+			console.log(averageRating);
 
 		const averageRatingResponse = await updateProductReviewRating(
 			body.data.product.id,
 			averageRating,
 		);
-		console.log(averageRatingResponse);
 		return NextResponse.json(
 			{ message: `Status: ${averageRatingResponse?.id}` },
 			{ status: 201 },
