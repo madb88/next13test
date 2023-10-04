@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getReviewsByProduct } from "@/api/reviews";
 import { updateProductReviewRating } from "@/api/products";
 
@@ -37,6 +37,7 @@ export async function POST(request: NextRequest): Promise<Response> {
 		);
 		revalidatePath(`/product/${body.data.product.id}`);
 		revalidatePath(`/products`);
+		revalidateTag("products");
 
 		return NextResponse.json(
 			{ message: `Status: ${averageRatingResponse?.id}` },
