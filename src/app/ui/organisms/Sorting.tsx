@@ -31,6 +31,12 @@ export const Sorting = () => {
 			<option data-testid="sort-by-price" value="price_DESC">
 				Price DESC
 			</option>
+			<option data-testid="sort-by-rating" value="rating_ASC">
+				Rating ASC
+			</option>
+			<option data-testid="sort-by-rating" value="rating_DESC">
+				Rating DESC
+			</option>
 		</select>
 	);
 };

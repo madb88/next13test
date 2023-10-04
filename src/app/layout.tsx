@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { ClerkProvider } from '@clerk/nextjs'
 import Navigation from "./ui/organisms/Navigation";
 
 const montserrat = Montserrat({
@@ -19,6 +20,7 @@ export default function RootLayout({
 	modal?: React.ReactNode;
 }) {
 	return (
+		<ClerkProvider>
 		<html lang="en">
 			{modal}
 			<body className={montserrat.className}>
@@ -33,5 +35,6 @@ export default function RootLayout({
 				</footer>
 			</body>
 		</html>
+		</ClerkProvider>
 	);
 }
