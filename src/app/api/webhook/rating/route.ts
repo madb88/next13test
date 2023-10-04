@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getReviewsByProduct } from "@/api/reviews";
 import { updateProductReviewRating } from "@/api/products";
 
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest): Promise<Response> {
 			body.data.product.id,
 			averageRating,
 		);
-
+		revalidatePath(`/product/${body.data.product.id}`);
 		return NextResponse.json(
 			{ message: `Status: ${averageRatingResponse?.id}` },
 			{ status: 201 },
