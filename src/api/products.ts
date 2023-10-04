@@ -18,6 +18,7 @@ export const getProductsListNew = async (
 		query: ProductsGetListDocument,
 		variables: { first: first, skip: skip, orderBy: order },
 		next: {
+			revalidate: 15,
 			tags: ["products"],
 		},
 	});
@@ -33,6 +34,7 @@ export const getProductById = async (id: string) => {
 		query: ProductGetByIdDocument,
 		variables: { id: id },
 		next: {
+			revalidate: 15,
 			tags: ["products"],
 		},
 	});
