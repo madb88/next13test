@@ -15,7 +15,7 @@ type ProductProps = {
 };
 
 export const Product = async ({ product }: ProductProps) => {
-	const reviews = await getReviewsByProduct(product);
+	const {reviews} = await getReviewsByProduct(product);
 
 	async function addToCartAction() {
 		"use server";

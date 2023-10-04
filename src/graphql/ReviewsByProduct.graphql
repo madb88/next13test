@@ -7,4 +7,9 @@ query ReviewsForProduct($product: ProductWhereInput) {
 		name
 		email
 	}
+	reviewsConnection {
+		aggregate {
+			count
+		}
+	}
 }

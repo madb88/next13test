@@ -6,6 +6,7 @@ import {
 	ProductsGetByCollectionNameDocument,
 	ProductsGetListDocument,
 	ProductsSearchByNameDocument,
+	ProductUpdateRatingDocument,
 } from "@/gql/graphql";
 
 export const getProductsListNew = async (
@@ -77,4 +78,16 @@ export const getProductsByCollectionName = async (
 	});
 
 	return graphqlResponse.collections;
+};
+
+export const updateProductReviewRating = async (
+	productId: string,
+	rating: number,
+) => {
+	const graphqlResponse = await executeGraphqlQuery({
+		query: ProductUpdateRatingDocument,
+		variables: { productId: productId, rating: rating },
+	});
+
+	return graphqlResponse.updateProduct;
 };

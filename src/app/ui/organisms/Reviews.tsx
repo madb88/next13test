@@ -14,7 +14,7 @@ export const Reviews = async ({
 				{reviews.map((review) => {
 					return (
 						<div
-							key={review.id}
+							key={review.content + review.email + review.name}
 							className="rounded-md bg-slate-300 p-5"
 						>
 							<p>Title: {review.headline}</p>

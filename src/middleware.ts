@@ -14,5 +14,6 @@ export default authMiddleware({
 		"/collections(.*)",
 		"/products(.*)",
 		"/product(.*)",
+		"/api(.*)",
 	],
 });

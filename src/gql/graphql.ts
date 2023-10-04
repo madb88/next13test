@@ -10854,6 +10854,14 @@ export type ProductGetByIdQuery = { product?: { id: string, name: string, descri
 
 export type ProductListItemFragmentFragment = { id: string, name: string, price: number, rating?: number | null, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
+export type ProductUpdateRatingMutationVariables = Exact<{
+  productId?: InputMaybe<Scalars['ID']['input']>;
+  rating?: InputMaybe<Scalars['Float']['input']>;
+}>;
+
+
+export type ProductUpdateRatingMutation = { updateProduct?: { id: string, name: string, rating?: number | null } | null };
+
 export type ProductsGetByCategoryNameQueryVariables = Exact<{
   categoryName: Scalars['String']['input'];
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -10905,7 +10913,7 @@ export type ReviewsForProductQueryVariables = Exact<{
 }>;
 
 
-export type ReviewsForProductQuery = { reviews: Array<{ headline: string, id: string, content: string, rating: number, name: string, email: string }> };
+export type ReviewsForProductQuery = { reviews: Array<{ headline: string, id: string, content: string, rating: number, name: string, email: string }>, reviewsConnection: { aggregate: { count: number } } };
 
 export type SizesGetListQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -11116,6 +11124,15 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   price
   rating
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
+export const ProductUpdateRatingDocument = new TypedDocumentString(`
+    mutation ProductUpdateRating($productId: ID, $rating: Float) {
+  updateProduct(where: {id: $productId}, data: {rating: $rating}) {
+    id
+    name
+    rating
+  }
+}
+    `) as unknown as TypedDocumentString<ProductUpdateRatingMutation, ProductUpdateRatingMutationVariables>;
 export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
     query ProductsGetByCategoryName($categoryName: String!, $first: Int, $skip: Int) {
   products(
@@ -11227,6 +11244,11 @@ export const ReviewsForProductDocument = new TypedDocumentString(`
     rating
     name
     email
+  }
+  reviewsConnection {
+    aggregate {
+      count
+    }
   }
 }
     `) as unknown as TypedDocumentString<ReviewsForProductQuery, ReviewsForProductQueryVariables>;
