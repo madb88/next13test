@@ -2,6 +2,12 @@
 import { type Route } from "next";
 import { Suspense } from "react";
 import { ShoppingCart } from "lucide-react";
+import {
+	SignInButton,
+	SignedIn,
+	SignedOut,
+	UserButton,
+} from "@clerk/nextjs";
 import { ActiveLink } from "../atoms/ActiveLink";
 import { SearchInput } from "../molecules/SearchInput";
 import { getCategoriesList } from "@/api/categories";
@@ -78,6 +84,14 @@ export default async function Navigation({}) {
 						<ActiveLink href="/cart/sidebar">
 							<ShoppingCart className="h-6 w-6 flex-shrink-0" />
 						</ActiveLink>
+					</div>
+					<div>
+						<SignedIn>
+							<UserButton />
+						</SignedIn>
+						<SignedOut>
+							<SignInButton />
+						</SignedOut>
 					</div>
 				</div>
 			</div>

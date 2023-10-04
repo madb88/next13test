@@ -24,7 +24,7 @@ export const ProductListItemDescription = ({
 			>
 				{formatMoney(price / 100)}$
 			</p>
-			<p data-testid="product-rating">{rating}</p>
+			<p data-testid="product-rating">{rating?.toFixed(2)}</p>
 		</div>
 	);
 };

@@ -25,7 +25,9 @@ export const ProductDescription = async ({
 			</h3>
 			<div>
 				<p>Rating</p>
-				<p data-testid="product-rating">{product.rating}</p>
+				<p data-testid="product-rating">
+					{product.rating && product.rating.toFixed(2)}
+				</p>
 			</div>
 			<p>
 				Color: <Variants variants={colors} />
