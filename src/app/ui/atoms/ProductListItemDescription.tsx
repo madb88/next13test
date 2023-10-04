@@ -6,7 +6,7 @@ type ProductListItemDescriptionProps = {
 };
 
 export const ProductListItemDescription = ({
-	product: { name, price, categories },
+	product: { name, price, categories, rating },
 }: ProductListItemDescriptionProps) => {
 	return (
 		<div className="mt-2 flex justify-between gap-3">
@@ -24,6 +24,7 @@ export const ProductListItemDescription = ({
 			>
 				{formatMoney(price / 100)}$
 			</p>
+			<p data-testid="product-rating">{rating}</p>
 		</div>
 	);
 };
