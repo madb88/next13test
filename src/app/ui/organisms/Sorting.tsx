@@ -23,7 +23,7 @@ export const Sorting = () => {
 	return (
 		<select onChange={handleChange}>
 			<option selected disabled value="">
-				Sort by price
+				Sort by
 			</option>
 			<option data-testid="sort-by-price" value="price_ASC">
 				Price ASC

@@ -36,6 +36,8 @@ export async function POST(request: NextRequest): Promise<Response> {
 			averageRating,
 		);
 		revalidatePath(`/product/${body.data.product.id}`);
+		revalidatePath(`/products`);
+
 		return NextResponse.json(
 			{ message: `Status: ${averageRatingResponse?.id}` },
 			{ status: 201 },
