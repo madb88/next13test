@@ -17,7 +17,6 @@ export type ReviewType = {
 
 export async function POST(request: NextRequest): Promise<Response> {
 	const body = (await request.json()) as ReviewType;
-	console.log(body);
 	if (body && body.data && body.data.product.id) {
 		let averageRating = 0;
 
@@ -29,19 +28,13 @@ export async function POST(request: NextRequest): Promise<Response> {
 			return acc + edge.rating;
 		}, 0);
 
-		console.log(total);
-		console.log(reviewsConnection.aggregate.count);
-		averageRating = Math.floor(
-			total / reviewsConnection.aggregate.count,
-		);
-
-		console.log(averageRating);
+		averageRating = total / reviewsConnection.aggregate.count;
 
 		const averageRatingResponse = await updateProductReviewRating(
 			body.data.product.id,
 			averageRating,
 		);
-		console.log(averageRatingResponse);
+
 		return NextResponse.json(
 			{ message: `Status: ${averageRatingResponse?.id}` },
 			{ status: 201 },
