@@ -23,6 +23,7 @@ const documents = {
     "mutation CartSetItemQuantity($itemId: ID!, $quantity: Int!) {\n  updateOrderItem(where: {id: $itemId}, data: {quantity: $quantity}) {\n    id\n  }\n}": types.CartSetItemQuantityDocument,
     "mutation UpdateProduct($orderId: ID!, $quantity: Int!) {\n  updateOrderItem(where: {id: $orderId}, data: {quantity: $quantity}) {\n    id\n  }\n}": types.UpdateProductDocument,
     "query ColorsGetList($id: ID!) {\n  productColorVariants(where: {product: {id: $id}}) {\n    id\n    name\n  }\n}": types.ColorsGetListDocument,
+    "query GetOrdersByEmail($email: String!) {\n  orders(where: {email: $email}) {\n    id\n    total\n    orderItems {\n      id\n      quantity\n      total\n      product {\n        name\n        price\n        images {\n          url\n        }\n      }\n    }\n  }\n}": types.GetOrdersByEmailDocument,
     "fragment ProductFragment on Product {\n  id\n  name\n  description\n  categories(first: 1) {\n    name\n  }\n  images(first: 4) {\n    url\n  }\n  price\n  rating\n}": types.ProductFragmentFragmentDoc,
     "query ProductGetById($id: ID) {\n  product(where: {id: $id}) {\n    ...ProductFragment\n  }\n}": types.ProductGetByIdDocument,
     "fragment ProductListItemFragment on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  rating\n}": types.ProductListItemFragmentFragmentDoc,
@@ -76,6 +77,10 @@ export function graphql(source: "mutation UpdateProduct($orderId: ID!, $quantity
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ColorsGetList($id: ID!) {\n  productColorVariants(where: {product: {id: $id}}) {\n    id\n    name\n  }\n}"): typeof import('./graphql').ColorsGetListDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetOrdersByEmail($email: String!) {\n  orders(where: {email: $email}) {\n    id\n    total\n    orderItems {\n      id\n      quantity\n      total\n      product {\n        name\n        price\n        images {\n          url\n        }\n      }\n    }\n  }\n}"): typeof import('./graphql').GetOrdersByEmailDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

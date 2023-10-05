@@ -10843,6 +10843,13 @@ export type ColorsGetListQueryVariables = Exact<{
 
 export type ColorsGetListQuery = { productColorVariants: Array<{ id: string, name: string }> };
 
+export type GetOrdersByEmailQueryVariables = Exact<{
+  email: Scalars['String']['input'];
+}>;
+
+
+export type GetOrdersByEmailQuery = { orders: Array<{ id: string, total: number, orderItems: Array<{ id: string, quantity: number, total: number, product?: { name: string, price: number, images: Array<{ url: string }> } | null }> }> };
+
 export type ProductFragmentFragment = { id: string, name: string, description: string, price: number, rating?: number | null, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
 export type ProductGetByIdQueryVariables = Exact<{
@@ -11105,6 +11112,26 @@ export const ColorsGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ColorsGetListQuery, ColorsGetListQueryVariables>;
+export const GetOrdersByEmailDocument = new TypedDocumentString(`
+    query GetOrdersByEmail($email: String!) {
+  orders(where: {email: $email}) {
+    id
+    total
+    orderItems {
+      id
+      quantity
+      total
+      product {
+        name
+        price
+        images {
+          url
+        }
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<GetOrdersByEmailQuery, GetOrdersByEmailQueryVariables>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID) {
   product(where: {id: $id}) {
